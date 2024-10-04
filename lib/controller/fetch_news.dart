@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart';
+import 'package:news_dh/models/news_art.dart';
 
 List sourcesId = [
   "abc-news",
@@ -33,7 +34,7 @@ List sourcesId = [
 ];
 
 class FetchNews {
-  static fetchNews() async {
+  static Future<NewsArt> fetchNews() async {
     // final _random = new Random();
     // var element = sourcesId[_random.nextInt(sourcesId.length)];
     // print(element);
@@ -50,5 +51,7 @@ class FetchNews {
     var randomArticle = (articles..shuffle()).first;
     print(randomArticle);
     print("********************************************************");
+
+    return NewsArt.fromApitoApp(randomArticle);
   }
 }
