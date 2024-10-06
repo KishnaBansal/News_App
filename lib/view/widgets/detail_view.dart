@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class DetailView extends StatefulWidget {
-  final String newsUrl; // Add 'final' here
+  String newsUrl; // Add 'final' here
 
-  const DetailView({Key? key, required this.newsUrl})
+  DetailView({Key? key, required this.newsUrl})
       : super(key: key); // Update super(key: key)
 
   @override
@@ -14,6 +14,16 @@ class DetailView extends StatefulWidget {
 
 class _DetailViewState extends State<DetailView> {
   late InAppWebViewController inAppWebViewController;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      widget.newsUrl = widget.newsUrl.contains("http:")
+          ? widget.newsUrl.replaceAll("http:", "https:")
+          : widget.newsUrl;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

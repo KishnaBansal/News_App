@@ -11,11 +11,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = true;
   late NewsArt newsArt;
 
   GetNews() async {
     newsArt = await FetchNews.fetchNews();
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -31,17 +34,19 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: PageController(initialPage: 0),
         scrollDirection: Axis.vertical,
         onPageChanged: (value) {
-          setState(() {});
+          setState(() {
+            isLoading = true;
+          });
           GetNews();
         },
         itemBuilder: (context, index) {
-          return NewsContainer(
+          return isLoading ? Center(child: CircularProgressIndicator(),) :NewsContainer(
             imageUrl: newsArt.imgUrl,
             newsCnt: newsArt.newsCnt,
             newsHead: newsArt.newsHead,
             newsDesc: newsArt.newsDesc,
             newsUrl: newsArt.newsUrl,
-          );
+          ); 
         },
       ),
     );
