@@ -41,7 +41,7 @@ class FetchNews {
     print(randomItem);
     Response response = await get(
       Uri.parse(
-          "https://newsapi.org/v2/top-headlines?sources=$randomItem&apiKey=3dbf5e164aee40b6a5e31bb4f5cba558"),
+          "https://newsapi.org/v2/top-headlines?sources=$randomItem&apiKey=YOUR_API_KEY"),
     );
     Map body_data = jsonDecode(response.body);
     List articles = body_data["articles"];
